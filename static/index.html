@@ -12,7 +12,7 @@
   <body>
     <div class='menu-container'>
         <div class='menu'>
-          <div class='follow'>FOLLOW US</div>        
+          <div class='follow'>PORTFOLIO</div>        
           <div class='signup'>SIGN UP</div>
           <div class='login'>LOGIN</div>
         </div>
@@ -22,27 +22,31 @@
         <div class='header'>
           <div class='logo'><img src='images/crypto.png'/></div>
         </div>
-      </div>
+    </div>
 
-      <div class='photo-grid-container'>
-        <div class='photo-grid'>
-          <div class='photo-grid-item first-item'>
-            
+    <div class='portfolio-container'>
+        <form id="form">
+          <div class="form">
+              <label for="crypto" id="label">ADD CRYPTO</label>
+              <input type="text" name="name" class="crypto" placeholder="Token Name">
+              <input type="text" name="amount" class="crypto" placeholder="USD Invested">
+              <input type="text" name="price" class="crypto" placeholder="Price At Purchase">
+              <input type="text" name="tokens" class="crypto" placeholder="Units Own">
+              <input type="text" name="date" class="crypto" placeholder="YYYY-MM-DD">
+              <input type="submit" id="submit">
           </div>
-          <div class='photo-grid-item'>
-        
-          </div>
-          <div class='photo-grid-item'>
-            
-          </div>
-          <div class='photo-grid-item'>
-        
-          </div>
-          <div class='photo-grid-item last-item'>
-            
-          </div>
+        </form>
+        <!-- <button id="find">GET</button> -->
+        <div class="division"></div>
+        <div class="photo-grid">
+          <div class="name">name</div>
+          <div class='amount'>amount</div>    
+          <div class='price'>price</div>    
+          <div class='tokens'>tokens</div>    
+          <div class='date'>date</div>    
+          <div class='pnl'>pnl</div>        
         </div>
-      </div>
+    </div>
 
       <div class='footer'>
         <div class='footer-item footer-one'></div>
