@@ -1,5 +1,4 @@
 
-  
 document.getElementById("submit").addEventListener("click", (e) => {
   e.preventDefault();
   
@@ -71,14 +70,14 @@ function showPortfolio() {
         })
         function deleteToken() {
           fetch("/api/crypto/" + values.id, {
-            method: 'DELETE',
+            method: 'DELETE'
           })
-            .then(res => res.json())
+            // .then(res => res.json())
             .then(res => console.log(res))
           console.log("hi")
         }
-      })
-    }).catch()
+      }).catch()
+    })
 }
 // });
 
