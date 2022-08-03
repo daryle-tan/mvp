@@ -76,8 +76,8 @@ function showPortfolio() {
             .then(res => console.log(res))
           console.log("hi")
         }
-      }).catch()
-    })
+      })
+    }).catch()
 }
 // });
 
