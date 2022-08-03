@@ -21,20 +21,11 @@ const pool = new pg.Pool({
     : {}),
 });
 
-// const URL = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd`
-// app.get(URL, (req, res, next) => {
-//   pool.query("SELECT * FROM v3").then((result) => {
-//     res.send(result.rows)
-//   })
-//     .catch(next);
-// });
-
 app.get("/api/crypto", (req, res, next) => {
   pool
     .query("SELECT * FROM crypto")
     .then((result) => {
       res.send(result.rows);
-      console.log(result)
     })
     .catch(next);
 });
@@ -68,7 +59,6 @@ app.post("/api/crypto", (req, res, next) => {
     .then((data) => {
       if (req.body) {
         res.send(data);
-        console.log(data);
       } else {
         res.sendStatus(400);
       }
@@ -85,7 +75,7 @@ app.delete("/api/crypto/:id", (req, res, next) => {
       if (data.rows.length === 0) {
         res.sendStatus(404);
       } else {
-        res.send(data.rows[0]);
+        res.send("success");
       }
     })
     .catch(next);
@@ -101,3 +91,12 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`listening to ${PORT}`);
 });
+
+
+// const URL = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd`
+// app.get(URL, (req, res, next) => {
+//   pool.query("SELECT * FROM v3").then((result) => {
+//     res.send(result.rows)
+//   })
+//     .catch(next);
+// });
