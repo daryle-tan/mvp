@@ -70,11 +70,12 @@ function showPortfolio() {
           deleteToken();
         })
         function deleteToken() {
-          fetch(`/api/crypto/${id}`, {
+          fetch("/api/crypto/" + values.id, {
             method: 'DELETE',
           })
             .then(res => res.json())
             .then(res => console.log(res))
+          console.log("hi")
         }
       })
     }).catch()
