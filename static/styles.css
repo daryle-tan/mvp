@@ -134,7 +134,7 @@
 }
 
 .title {
-  font-weight: bold;
+  font-family:fantasy;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,6 +144,7 @@
 }
 
 .token {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -269,7 +270,7 @@
   text-align: center;
   width: 100%;
   margin-bottom: 2px;
-  padding: 1px 1px 1px 1px; 
+  padding: 2px 2px 2px 2px; 
   border: inset rgb(42, 55, 71);
 }
 
