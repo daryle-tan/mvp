@@ -1,5 +1,6 @@
 const portfolioGrid = document.querySelector(".portfolio-grid");
 const columnTitle = document.querySelector(".columnTitle");
+const inputBox = document.querySelectorAll(".crypto");
 
 document.getElementById("submit").addEventListener("click", (e) => {
   e.preventDefault();
@@ -37,6 +38,9 @@ document.getElementById("submit").addEventListener("click", (e) => {
       })
       .then((data) => {
         showPortfolio()
+        inputBox.forEach(input => {
+          input.value = '';
+        });
         // console.log(JSON.stringify(data))
       })
       .catch((err) => console.log("Error"));

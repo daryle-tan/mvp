@@ -71,7 +71,6 @@ app.delete("/api/crypto/:id", (req, res, next) => {
   pool
     .query("DELETE FROM crypto WHERE id = $1 RETURNING *;", [id])
     .then((data) => {
-      console.log(data);
       if (data.rows.length === 0) {
         res.sendStatus(404);
       } else {
