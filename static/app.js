@@ -1,4 +1,5 @@
 const portfolioGrid = document.querySelector(".portfolio-grid");
+const columnTitle = document.querySelector(".columnTitle");
 
 document.getElementById("submit").addEventListener("click", (e) => {
   e.preventDefault();
@@ -42,6 +43,7 @@ document.getElementById("submit").addEventListener("click", (e) => {
 });
 
 document.querySelector(".logo").addEventListener("click", (e) => {
+  portfolioGrid.innerHTML = "";
   showPortfolio()
 })
 
@@ -62,6 +64,7 @@ function showPortfolio() {
            <div class="token">${values.tokens_owned}</div>
            <div class="token">PNL</div>     
            <div class="token">${values.date_purchased}</div>`
+        portfolioGrid.prepend(columnTitle);
         portfolioGrid.appendChild(addedToken);
 
         const deleteBtn = document.createElement("div");
