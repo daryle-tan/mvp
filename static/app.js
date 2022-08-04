@@ -2,7 +2,8 @@ const portfolioGrid = document.querySelector(".portfolio-grid");
 
 document.getElementById("submit").addEventListener("click", (e) => {
   e.preventDefault();
-  portfolioGrid.innerHTML = ""
+  portfolioGrid.innerHTML = "";
+  
   const nameInput = document
     .querySelector(`[name="name"]`).value.toUpperCase();
   const amountInput = document
@@ -13,8 +14,6 @@ document.getElementById("submit").addEventListener("click", (e) => {
       .querySelector(`[name="tokens"]`).value
   const dateInput = document
     .querySelector(`[name="date"]`).value;
-  
-  
   
   const newCrypto = {
       name: nameInput,
@@ -45,7 +44,7 @@ document.getElementById("submit").addEventListener("click", (e) => {
 document.querySelector(".logo").addEventListener("click", (e) => {
   showPortfolio()
 })
-// document.addEventListener('DOMContentLoaded', (e) => {
+
 function showPortfolio() {
   fetch("/api/crypto")
     .then((data) => {
@@ -54,38 +53,70 @@ function showPortfolio() {
       let data1 = "";
       completedData.map((values) => {
         let id = values.id;
-        data1 += `<div class="addedToken">
-                    <div class="token">${values.name}</div>
-                    <div class="token">${values.amount_invested}</div>    
-                    <div class="token">${values.price_at_purchase}</div>    
-                    <div class="token">${values.tokens_owned}</div>
-                    <div class="token">PNL</div>     
-                    <div class="token">${values.date_purchased}</div>
-                    <button class="delete">X</button> 
-                  </div>`
-       
-        portfolioGrid.innerHTML = data1;
-        const deleteBtn = document.querySelector(".delete");
-        const addedToken = document.querySelector(".addedToken")
+        const addedToken = document.createElement("div");
+        addedToken.classList.add("addedToken"); 
+        addedToken.innerHTML = 
+         ` <div class="token">${values.name}</div>
+           <div class="token">${values.amount_invested}</div>    
+           <div class="token">${values.price_at_purchase}</div>    
+           <div class="token">${values.tokens_owned}</div>
+           <div class="token">PNL</div>     
+           <div class="token">${values.date_purchased}</div>`
+        portfolioGrid.appendChild(addedToken);
 
-        deleteBtn.addEventListener("click", (e) => {
-          // if (e.target.id === id) {           
-            addedToken.remove();
-            console.log(values.id)
-            fetch("/api/crypto/" + values.id, {
-              method: 'DELETE'
-            })
-          // }          
-          // }
+        const deleteBtn = document.createElement("div");
+        deleteBtn.innerHTML = '<button class="delete">X</button>'; 
+        addedToken.appendChild(deleteBtn);
+
+        deleteBtn.addEventListener("click", (e) => {         
+          addedToken.remove();
+          deleteMethod()
         })
+        function deleteMethod() {
+          fetch("/api/crypto/" + values.id, {
+            method: 'DELETE'
+          }).then(() => {
+            console.log.apply('Deletd')
+          }).catch(err => console.log(err));
+        }
       })
     }).catch()
 }
-// });
 
 
+// document.addEventListener('DOMContentLoaded', (e) => {
+// function showPortfolio() {
+//   fetch("/api/crypto")
+//     .then((data) => {
+//       return data.json();
+//     }).then((completedData) => {
+//       let data1 = "";
+//       completedData.map((values) => {
+//         let id = values.id;
+//         data1 += `<div class="addedToken">
+//                     <div class="token">${values.name}</div>
+//                     <div class="token">${values.amount_invested}</div>    
+//                     <div class="token">${values.price_at_purchase}</div>    
+//                     <div class="token">${values.tokens_owned}</div>
+//                     <div class="token">PNL</div>     
+//                     <div class="token">${values.date_purchased}</div>
+//                     <button class="delete">X</button> 
+//                   </div>`
+       
+//         portfolioGrid.innerHTML = data1;
+//         const deleteBtn = document.querySelector(".delete");
+//         const addedToken = document.querySelector(".addedToken");
 
-
+//         deleteBtn.addEventListener("click", (e) => {         
+//             addedToken.remove();
+            
+//             fetch("/api/crypto/" + values.id, {
+//               method: 'DELETE'
+//             })
+//         })
+//       })
+//     }).catch()
+// }
 
 // function loadNewToken(data) {
 //   document.addEventListener('DOMContentLoaded', (e) => {
