@@ -1,7 +1,8 @@
+const portfolioGrid = document.querySelector(".portfolio-grid");
 
 document.getElementById("submit").addEventListener("click", (e) => {
   e.preventDefault();
-  
+  portfolioGrid.innerHTML = ""
   const nameInput = document
     .querySelector(`[name="name"]`).value.toUpperCase();
   const amountInput = document
@@ -11,7 +12,10 @@ document.getElementById("submit").addEventListener("click", (e) => {
   const tokenInput = document
       .querySelector(`[name="tokens"]`).value
   const dateInput = document
-      .querySelector(`[name="date"]`).value;
+    .querySelector(`[name="date"]`).value;
+  
+  
+  
   const newCrypto = {
       name: nameInput,
       amount_invested: amountInput,
@@ -33,7 +37,7 @@ document.getElementById("submit").addEventListener("click", (e) => {
       })
       .then((data) => {
         showPortfolio()
-        console.log(JSON.stringify(data))
+        // console.log(JSON.stringify(data))
       })
       .catch((err) => console.log("Error"));
 });
@@ -51,53 +55,36 @@ function showPortfolio() {
       completedData.map((values) => {
         let id = values.id;
         data1 += `<div class="addedToken">
-                    <div class="token" id="name">${values.name}</div>
-                    <div class="token" id='amount'>${values.amount_invested}</div>    
-                    <div class="token" id='price'>${values.price_at_purchase}</div>    
-                    <div class="token" id='tokens'>${values.tokens_owned}</div>
-                    <div class="token" id='pnl'>PNL</div>     
-                    <div class="token" id='date'>${values.date_purchased}</div>
-                    <button id="delete">X</button> 
+                    <div class="token">${values.name}</div>
+                    <div class="token">${values.amount_invested}</div>    
+                    <div class="token">${values.price_at_purchase}</div>    
+                    <div class="token">${values.tokens_owned}</div>
+                    <div class="token">PNL</div>     
+                    <div class="token">${values.date_purchased}</div>
+                    <button class="delete">X</button> 
                   </div>`
        
-        document.querySelector(".portfolio-grid").innerHTML = data1;
-        const deleteBtn = document.getElementById("delete");
-        const addedToken = document.querySelector(".addedToken");
-        deleteBtn.addEventListener("click", () => {
-          document.querySelector(".addedToken").remove();
-          console.log("deleted!")
-          deleteToken();
+        portfolioGrid.innerHTML = data1;
+        const deleteBtn = document.querySelector(".delete");
+        const addedToken = document.querySelector(".addedToken")
+
+        deleteBtn.addEventListener("click", (e) => {
+          // if (e.target.id === id) {           
+            addedToken.remove();
+            console.log(values.id)
+            fetch("/api/crypto/" + values.id, {
+              method: 'DELETE'
+            })
+          // }          
+          // }
         })
-        function deleteToken() {
-          fetch("/api/crypto/" + values.id, {
-            method: 'DELETE'
-          })
-            // .then(res => res.json())
-            .then(res => console.log(res))
-          console.log("hi")
-        }
       })
     }).catch()
 }
 // });
 
 
-// function select() {
-//   document.getElementById("name").addEventListener("click", (e) => {
-//     console.log('this')
-//   })
-// }
 
-// function deleteToken(id) {
-//   console.log(id)
-  
-//     fetch('/api/crypto/' + id, {
-//       method: 'DELETE',
-//     })
-//       .then(res => res.json())
-//       .then(res => console.log(res))
-
-// }
 
 
 // function loadNewToken(data) {
@@ -116,12 +103,6 @@ function showPortfolio() {
 //   await fetch(string)
 //             .then(resp => resp.json())
 //             .then(data => console.log(string))}
-  
-  // document.getElementById("find").addEventListener("click", (e) => {
-  //   fetch("/api/crypto")
-  //         .then((data) => data.json(data))
-  //         .then((data) => console.log(JSON.stringify(data)));
-  // });
 
   // const loadTokens = (data) => {
   //   const tokenName = document.querySelector("name");
@@ -132,3 +113,8 @@ function showPortfolio() {
   //   const dateOfPurchase = document.querySelector("date");
   //   const profitNLoss = document.querySelector("pnl");
   // }
+
+     // addedToken.addEventListener('click', clicked)
+        // function clicked(e) {
+        //   return console.log(e.target.className);
+        // }
